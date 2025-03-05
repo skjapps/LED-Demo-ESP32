@@ -15,7 +15,7 @@ const char *password = "RGB5050&WS2812b";
 #define COLOR_ORDER GRB
 
 int NUM_LEDS = 100; // Default number of LEDs, can be changed via web page
-CRGB leds[180];    // Max 100 LEDs, adjust if necessary
+CRGB leds[180];     // Max 100 LEDs, adjust if necessary
 
 WebServer server(80);
 
@@ -102,18 +102,11 @@ void handleNotFound()
 void setup()
 {
     Serial.begin(115200);
-    FastLED.addLeds<LED_TYPE, DATA_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
-    FastLED.setBrightness(100);
+    pinMode(LED_BUILTIN, OUTPUT);
 
-    WiFi.begin(ssid, password);
-    while (WiFi.status() != WL_CONNECTED)
-    {
-        delay(1000);
-        Serial.println("Connecting to WiFi...");
-    }
-    Serial.println("Connected to WiFi");
-    Serial.print("IP address: ");
-    Serial.println(WiFi.localIP());
+    WiFi.softAP(ssid, password); // Start access point mode
+    Serial.print("Access Point IP address: ");
+    Serial.println(WiFi.softAPIP());
 
     server.on("/", handleRoot);
     server.on("/setNumLeds", handleSetNumLeds);
