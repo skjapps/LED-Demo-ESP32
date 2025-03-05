@@ -1,0 +1,50 @@
+{
+    "version": 1,
+    "author": "Srikanth Jakka",
+    "editor": "wokwi",
+    "parts": [
+      { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 9.6, "left": -4.76, "attrs": {} },
+      {
+        "type": "wokwi-neopixel",
+        "id": "rgb1",
+        "top": -44.3,
+        "left": -135.2,
+        "rotate": 180,
+        "attrs": {}
+      },
+      {
+        "type": "wokwi-neopixel",
+        "id": "rgb2",
+        "top": -44.3,
+        "left": -96.8,
+        "rotate": 180,
+        "attrs": {}
+      },
+      {
+        "type": "wokwi-led-ring",
+        "id": "ring1",
+        "top": -172.16,
+        "left": -18.01,
+        "attrs": { "pixels": "16" }
+      },
+      {
+        "type": "wokwi-led-ring",
+        "id": "ring2",
+        "top": -172.16,
+        "left": 154.79,
+        "attrs": { "pixels": "16" }
+      }
+    ],
+    "connections": [
+      [ "esp:TX", "$serialMonitor:RX", "", [] ],
+      [ "esp:RX", "$serialMonitor:TX", "", [] ],
+      [ "rgb1:DOUT", "rgb2:DIN", "green", [ "h9.6", "v10.5" ] ],
+      [ "ring1:GND", "esp:GND.3", "black", [ "v19.2", "h76.8", "v-9.6" ] ],
+      [ "ring1:VCC", "esp:5V", "red", [ "v9.6", "h76.8", "v211.2", "h0", "v28.8", "h-153.6" ] ],
+      [ "ring1:DIN", "esp:25", "green", [ "v28.8", "h-76.8", "v105.6" ] ],
+      [ "ring1:DOUT", "ring2:DIN", "green", [ "v28.8", "h153.6" ] ],
+      [ "ring2:GND", "esp:GND.3", "black", [ "v115.2", "h-115.2" ] ],
+      [ "ring2:VCC", "esp:5V", "red", [ "v268.8", "h-220.8" ] ]
+    ],
+    "dependencies": {}
+  }
